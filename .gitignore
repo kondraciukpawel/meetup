@@ -28,3 +28,11 @@ config/secrets.yml
 
 # Ignore pow environment settings
 .powenv
+
+# Gulp
+node_modules/
+.sass-cache/
+*.sassc
+*.scssc
+*.log
+

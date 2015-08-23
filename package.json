@@ -1,0 +1,11 @@
+{
+  "name": "meetup",
+  "version": "0.0.1",
+  "description": "Meet up and hangout with someone",
+  "main": "Gulpfile.js",
+  "author": "Pawel Kondraciuk",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}
