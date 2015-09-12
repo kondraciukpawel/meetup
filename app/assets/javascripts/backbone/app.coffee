@@ -7,7 +7,7 @@
     mainRegion: '#main-region'
     footerRegion: '#footer-region'
     
-  App.on "initializer:after", ->
+  App.on 'start', ->
     if Backbone.history
       Backbone.history.start()
 
