@@ -12,6 +12,17 @@ var util = require('gulp-util');
 
 var bowerDir = './vendor/assets/components';
 var sassDir = './app/assets/stylesheets';
+var destDir = './public/assets/';
+var jsDir = './app/assets/javascripts/';
+
+var paths = {
+  vendorJs: [
+    bowerDir + '/jquery/dist/jquery.js',
+    bowerDir + '/underscore/underscore.js',
+    bowerDir + '/backbone/backbone.js',
+    bowerDir + '/backbone.marionette/lib/backbone.marionette.js'
+  ]
+}
 
 var config = {
   sass: {
@@ -25,17 +36,50 @@ var config = {
         bowerDir + '/font-awesome/scss'
       ]
     }
+  },
+  coffee: {
+    src: [jsDir + '**/*.coffee'], 
+    options: {
+      
+    }
   }
 }
 
+/*
+ *        SASS 
+ */
+
 gulp.task('sass', function() {
   return sass(config.sass.src, config.sass.options)
-    .pipe(autoprefixer())
+    .pipe(autoprefixer('last 3 version'))
     .pipe(rename('application.css'))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./public/assets/'))
+    .pipe(gulp.dest(destDir))
 });
 
 gulp.task('watch-sass', function() {
   gulp.watch(config.sass.watchSrc, ['sass']);
+});
+
+/*
+ *         JavaScript
+ */
+
+gulp.task('vendor-js', function() {
+  return gulp.src(paths.vendorJs)
+    .pipe(sourcemaps.init())
+    .pipe(concat('vendor.js'))
+    .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(destDir));
+});
+
+gulp.task('js', function () {
+  return gulp.src(config.coffee.src)
+    .pipe(coffee(config.coffee.options))
+    .pipe(sourcemaps.init())
+    .pipe(concat('app.js'))
+    .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(destDir));
 });
