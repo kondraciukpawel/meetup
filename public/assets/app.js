@@ -1,0 +1,2 @@
+(function(){this.MeetUp=function(i,e){var n;return n=new e.Application,n.addRegions({headerRegion:"#header-region",mainRegion:"#main-region",footerRegion:"#footer-region"}),n.on("initializer:after",function(){return i.history?i.history.start():void 0}),n}(Backbone,Marionette)}).call(this);
+//# sourceMappingURL=app.js.map
