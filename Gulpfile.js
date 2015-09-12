@@ -39,6 +39,7 @@ var config = {
   },
   coffee: {
     src: [jsDir + '**/*.coffee'], 
+    watchSrc: [jsDir + '/**/*.coffee'],
     options: {
       
     }
@@ -76,10 +77,14 @@ gulp.task('vendor-js', function() {
 
 gulp.task('js', function () {
   return gulp.src(config.coffee.src)
-    .pipe(coffee(config.coffee.options))
     .pipe(sourcemaps.init())
+    .pipe(coffee(config.coffee.options))
     .pipe(concat('app.js'))
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(destDir));
+});
+
+gulp.task('watch-js', function() {
+  gulp.watch(config.coffee.watchSrc, ['js']);
 });

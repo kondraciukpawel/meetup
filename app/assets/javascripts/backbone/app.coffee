@@ -10,5 +10,5 @@
   App.on "initializer:after", ->
     if Backbone.history
       Backbone.history.start()
-    
+
   App
