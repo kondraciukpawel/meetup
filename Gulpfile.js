@@ -21,6 +21,7 @@ var jsDir = './app/assets/javascripts/';
 var paths = {
   vendorJs: [
     bowerDir + '/jquery/dist/jquery.js',
+    bowerDir + '/bootstrap-sass/assets/javascripts/bootstrap.js',
     bowerDir + '/underscore/underscore.js',
     bowerDir + '/handlebars/handlebars.js',
     bowerDir + '/backbone/backbone.js',
@@ -66,12 +67,10 @@ gulp.task('build-sass', function() {
     .pipe(autoprefixer('last 3 version'))
     .pipe(rename('application.css'))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(destDir))
-    .pipe(livereload());
+    .pipe(gulp.dest(destDir));
 });
 
 gulp.task('watch-sass', function() {
-  livereload.listen();
   gulp.watch(config.sass.watchSrc, ['sass']);
 });
 
@@ -97,12 +96,10 @@ gulp.task('build-js', function () {
     .pipe(concat('app.js'))
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(destDir))
-    .pipe(livereload());
+    .pipe(gulp.dest(destDir));
 });
 
 gulp.task('watch-js', function() {
-  livereload.listen();
   gulp.watch(config.coffee.watchSrc, ['js']);
 });
 
