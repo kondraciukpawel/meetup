@@ -109,8 +109,12 @@ gulp.task('templates', function(){
     .pipe(handlebars(config.templates.options))
     .pipe(wrap('Handlebars.template(<%= contents %>)'))
     .pipe(declare({
-      namespace: 'MeetUp.templates',
-      noRedeclare: true // Avoid duplicate declarations
+      namespace: 'JST',
+      noRedeclare: true, // Avoid duplicate declarations
+      processName: function(filePath) {
+        var newPath = filePath.substring(filePath.lastIndexOf("\\backbone\\apps")).replace("\\backbone\\apps\\", "").replace("\\templates", "").replace(".js", "");
+        return declare.processNameByPath(newPath);
+      }
     }))
     .pipe(concat('templates.js'))
     .pipe(gulp.dest(destDir));
