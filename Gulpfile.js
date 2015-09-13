@@ -61,17 +61,21 @@ var config = {
  *        SASS 
  */
 
-gulp.task('sass', function() {
+gulp.task('build-sass', function() {
   return sass(config.sass.src, config.sass.options)
     .pipe(autoprefixer('last 3 version'))
     .pipe(rename('application.css'))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(destDir))
+    .pipe(livereload());
 });
 
 gulp.task('watch-sass', function() {
+  livereload.listen();
   gulp.watch(config.sass.watchSrc, ['sass']);
 });
+
+gulp.task('sass', ['build-sass', 'watch-sass']);
 
 /*
  *         JavaScript
@@ -86,25 +90,29 @@ gulp.task('vendor-js', function() {
     .pipe(gulp.dest(destDir));
 });
 
-gulp.task('js', function () {
+gulp.task('build-js', function () {
   return gulp.src(config.coffee.src)
     .pipe(sourcemaps.init())
     .pipe(coffee(config.coffee.options))
     .pipe(concat('app.js'))
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(destDir));
+    .pipe(gulp.dest(destDir))
+    .pipe(livereload());
 });
 
 gulp.task('watch-js', function() {
+  livereload.listen();
   gulp.watch(config.coffee.watchSrc, ['js']);
 });
+
+gulp.task('js', ['build-js', 'watch-js']);
 
 /*
  *         Templates
  */
 
-gulp.task('templates', function(){
+gulp.task('build-templates', function(){
   gulp.src(config.templates.src)
     .pipe(handlebars(config.templates.options))
     .pipe(wrap('Handlebars.template(<%= contents %>)'))
@@ -117,9 +125,13 @@ gulp.task('templates', function(){
       }
     }))
     .pipe(concat('templates.js'))
-    .pipe(gulp.dest(destDir));
+    .pipe(gulp.dest(destDir))
+    .pipe(livereload());
 });
 
 gulp.task('watch-templates', function() {
+  livereload.listen();
   gulp.watch(config.templates.watchSrc, ['templates']);
 });
+
+gulp.task('templates', ['build-templates', 'watch-templates']);
