@@ -7,8 +7,7 @@ do (Backbone) ->
 			Backbone.history.navigate route, options
 	
 		getCurrentRoute: ->
-			frag = Backbone.history.fragment
-			if _.isEmpty(frag) then null else frag
+			Backbone.history.fragment
 		
 		startHistory: ->
 			if Backbone.history

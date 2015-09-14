@@ -10,7 +10,11 @@
     App.module("HeaderApp").start()
     
   App.on 'start', ->
-    if Backbone.history
-      Backbone.history.start()
+    @startHistory()
+      
+  App.reqres.setHandler "app:getRoutes", ->
+    new Backbone.Collection [
+      { name: 'Home', url: '' }
+    ]
 
   App
