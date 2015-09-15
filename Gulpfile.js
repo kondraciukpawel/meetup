@@ -12,7 +12,7 @@ var util = require('gulp-util');
 var handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
-var addSrc = require('gulp-add-src');
+var gulpif = require('gulp-if');
 
 var bowerDir = './vendor/assets/components';
 var sassDir = './app/assets/stylesheets';
@@ -22,13 +22,13 @@ var jsDir = './app/assets/javascripts/';
 var paths = {
   vendorJs: [
     bowerDir + '/jquery/dist/jquery.js',
+    bowerDir + '/moment/moment.js',
     bowerDir + '/bootstrap-sass/assets/javascripts/bootstrap.js',
     bowerDir + '/underscore/underscore.js',
     bowerDir + '/handlebars/handlebars.js',
     bowerDir + '/backbone/backbone.js',
     bowerDir + '/backbone.marionette/lib/backbone.marionette.js'
-  ],
-  routes: jsDir + '/routes.js'
+  ]
 }
 
 var config = {
@@ -45,8 +45,8 @@ var config = {
     }
   },
   coffee: {
-    src: [jsDir + '**/*.coffee'], 
-    watchSrc: [jsDir + '/**/*.coffee'],
+    src: [jsDir + '**/*.coffee', jsDir + '/routes.js'], 
+    watchSrc: [jsDir + '/**/*.coffee', jsDir + '/routes.js'],
     options: {
       
     }
@@ -94,8 +94,7 @@ gulp.task('vendor-js', function() {
 gulp.task('build-js', function () {
   return gulp.src(config.coffee.src)
     .pipe(sourcemaps.init())
-    .pipe(coffee(config.coffee.options))
-    .pipe(addSrc(paths.routes))
+    .pipe(gulpif(/[.]coffee$/, coffee(config.coffee.options)))
     .pipe(concat('app.js'))
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))

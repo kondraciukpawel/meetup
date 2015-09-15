@@ -22,5 +22,9 @@
     "gulp-util": "^3.0.6",
     "gulp-wrap": "^0.11.0",
     "handlebars": "^4.0.2"
+  },
+  "dependencies": {
+    "gulp-if": "^1.2.5",
+    "handlebars.moment": "^1.0.3"
   }
 }
