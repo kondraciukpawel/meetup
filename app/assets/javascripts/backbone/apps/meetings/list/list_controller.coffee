@@ -3,7 +3,7 @@
   List.Controller =
   
     list: ->
-      collection = App.reqres.request "meetings:collection"
+      collection = App.request "meetings:entities"
       listView = @getListView collection
       App.mainRegion.show listView
       

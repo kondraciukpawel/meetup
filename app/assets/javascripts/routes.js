@@ -343,6 +343,18 @@ Based on Rails routes of Meetup::Application
     };
     namespace(root, "Routes");
     root.Routes = {
+// edit_meeting => /meetings/:id/edit(.:format)
+  // function(id, options)
+  edit_meeting_path: Utils.route(["id"], ["format"], [2,[7,"/",false],[2,[6,"meetings",false],[2,[7,"/",false],[2,[3,"id",false],[2,[7,"/",false],[2,[6,"edit",false],[1,[2,[8,".",false],[3,"format",false]],false]]]]]]], arguments),
+// meeting => /meetings/:id(.:format)
+  // function(id, options)
+  meeting_path: Utils.route(["id"], ["format"], [2,[7,"/",false],[2,[6,"meetings",false],[2,[7,"/",false],[2,[3,"id",false],[1,[2,[8,".",false],[3,"format",false]],false]]]]], arguments),
+// meetings => /meetings(.:format)
+  // function(options)
+  meetings_path: Utils.route([], ["format"], [2,[7,"/",false],[2,[6,"meetings",false],[1,[2,[8,".",false],[3,"format",false]],false]]], arguments),
+// new_meeting => /meetings/new(.:format)
+  // function(options)
+  new_meeting_path: Utils.route([], ["format"], [2,[7,"/",false],[2,[6,"meetings",false],[2,[7,"/",false],[2,[6,"new",false],[1,[2,[8,".",false],[3,"format",false]],false]]]]], arguments),
 // rails_info => /rails/info(.:format)
   // function(options)
   rails_info_path: Utils.route([], ["format"], [2,[7,"/",false],[2,[6,"rails",false],[2,[7,"/",false],[2,[6,"info",false],[1,[2,[8,".",false],[3,"format",false]],false]]]]], arguments),
