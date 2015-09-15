@@ -11,5 +11,7 @@
     
   class List.Headers extends Marionette.CompositeView
     template: JST.header.headers
+    attributes: ->
+      class: "container"
     childView: List.Header
     childViewContainer: "ul"
