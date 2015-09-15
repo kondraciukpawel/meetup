@@ -14,7 +14,8 @@
       
   App.reqres.setHandler "app:getRoutes", ->
     new Backbone.Collection [
-      { name: 'Home', url: '' }
+      { name: 'Events', url: '' }
+      { name: 'Create new', url: 'new' }
     ]
 
   App

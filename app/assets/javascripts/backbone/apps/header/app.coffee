@@ -10,5 +10,4 @@
   HeaderApp.on "start", ->
     API.showHeader()
     Backbone.history.on "all", (route, router) ->
-      console.log App.getCurrentRoute()
       API.refreshHeader()
