@@ -12,6 +12,7 @@ var util = require('gulp-util');
 var handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
+var addSrc = require('gulp-add-src');
 
 var bowerDir = './vendor/assets/components';
 var sassDir = './app/assets/stylesheets';
@@ -26,7 +27,8 @@ var paths = {
     bowerDir + '/handlebars/handlebars.js',
     bowerDir + '/backbone/backbone.js',
     bowerDir + '/backbone.marionette/lib/backbone.marionette.js'
-  ]
+  ],
+  routes: jsDir + '/routes.js'
 }
 
 var config = {
@@ -93,6 +95,7 @@ gulp.task('build-js', function () {
   return gulp.src(config.coffee.src)
     .pipe(sourcemaps.init())
     .pipe(coffee(config.coffee.options))
+    .pipe(addSrc(paths.routes))
     .pipe(concat('app.js'))
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))

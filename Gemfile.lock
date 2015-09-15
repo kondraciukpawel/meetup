@@ -49,6 +49,9 @@ GEM
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    js-routes (1.1.2)
+      railties (>= 3.2)
+      sprockets-rails
     json (1.8.3)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -118,6 +121,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   jbuilder (~> 2.0)
+  js-routes
   rails (= 4.2.3)
   sdoc (~> 0.4.0)
   sqlite3
