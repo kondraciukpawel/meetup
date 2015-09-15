@@ -3,10 +3,13 @@
   class MeetingsApp.Router extends Marionette.AppRouter
     appRoutes:
       "": "list"
+      "new": "create"
       
   API = 
     list: ->
       MeetingsApp.List.Controller.list()
+    create: ->
+      MeetingsApp.Create.Controller.show()
       
   App.addInitializer ->
     new MeetingsApp.Router
